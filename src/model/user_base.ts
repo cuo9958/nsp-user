@@ -24,6 +24,21 @@ UserBase.init(
             defaultValue: "",
             comment: "用户名",
         },
+        nickname: {
+            type: DataTypes.STRING(50),
+            defaultValue: "",
+            comment: "昵称",
+        },
+        pwd: {
+            type: DataTypes.STRING(50),
+            defaultValue: "",
+            comment: "密码",
+        },
+        status: {
+            type: DataTypes.TINYINT,
+            defaultValue: 1,
+            comment: "用户状态，0：禁止；1：启用",
+        },
     },
     {
         sequelize: db,
@@ -50,6 +65,15 @@ export default {
             where: {
                 id,
             },
+        });
+    },
+    login(username: string, pwd: string) {
+        return UserBase.findOne({
+            where: {
+                username,
+                pwd,
+            },
+            attributes: ["uuid", "username", "nickname", "status", "createdAt"],
         });
     },
 };

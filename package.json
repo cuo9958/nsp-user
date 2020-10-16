@@ -25,6 +25,7 @@
         "koa-router": "^9.4.0",
         "koa-session": "^6.1.0",
         "mysql2": "^2.2.5",
+        "nanoid": "^3.1.12",
         "nodemon": "^2.0.5",
         "sequelize": "^6.3.5",
         "ts-node": "^9.0.0",
@@ -33,6 +34,7 @@
     "devDependencies": {
         "@types/config": "0.0.36",
         "@types/ioredis": "^4.17.5",
-        "@types/koa": "^2.11.5"
+        "@types/koa": "^2.11.5",
+        "@types/koa-router": "^7.4.1"
     }
 }

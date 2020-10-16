@@ -3,6 +3,8 @@
  */
 module.exports = {
     name: "nsp-user",
+    //加密使用到的附加值
+    dot: "dot",
     //开发环境数据库
     db: {
         host: "127.0.0.1",
