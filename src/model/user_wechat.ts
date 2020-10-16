@@ -2,51 +2,45 @@ import { Model, DataTypes } from "sequelize";
 import db from "../db//mysql";
 
 /**
- * 用户基础表，提供：
- * 1. 登录注册
- * 2. 鉴权、常用信息
+ * 微信登录表
  */
-class UserBase extends Model {}
-UserBase.init(
+class UserWechat extends Model {}
+UserWechat.init(
     {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        uuid: {
-            type: DataTypes.STRING(20),
+        openid: {
+            type: DataTypes.STRING(30),
             defaultValue: "",
-            comment: "用户对外id",
-        },
-        username: {
-            type: DataTypes.STRING(50),
-            defaultValue: "",
-            comment: "用户名",
+            comment: "微信openid",
         },
     },
     {
         sequelize: db,
         freezeTableName: true,
-        tableName: "t_user_base",
+        tableName: "t_user_wechat",
         indexes: [
             {
-                fields: ["uuid"],
+                unique: true,
+                fields: ["openid"],
             },
         ],
     }
 );
 
 //强制初始化数据库
-// UserBase.sync({ force: true });
+// UserWechat.sync({ force: true });
 
 export default {
-    sync: UserBase.sync,
+    sync: UserWechat.sync,
     insert: function (model: any) {
-        return UserBase.create(model);
+        return UserWechat.create(model);
     },
     get: function (id: number) {
-        return UserBase.findOne({
+        return UserWechat.findOne({
             where: {
                 id,
             },
