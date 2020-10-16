@@ -3,7 +3,7 @@ import KoaBody from "koa-body";
 import Session from "koa-session";
 import routers from "./router";
 
-import pkg from "../package.json";
+import config from "config";
 
 import "./task";
 
@@ -13,7 +13,7 @@ const CONFIG = {
     key: "pickstars",
     maxAge: 86400000,
 };
-app.keys = [pkg.name];
+app.keys = [config.get("name")];
 app.use(Session(CONFIG, app));
 app.use(
     KoaBody({
