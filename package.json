@@ -6,7 +6,8 @@
     "scripts": {
         "start": "cross-env NODE_ENV=production node dist/index.js",
         "dev": "cross-env NODE_ENV=development nodemon",
-        "build": "tsc"
+        "build": "tsc",
+        "clean": "node dist/install.js"
     },
     "keywords": [
         "nsp",
