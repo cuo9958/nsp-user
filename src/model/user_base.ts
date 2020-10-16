@@ -41,7 +41,7 @@ UserBase.init(
 // UserBase.sync({ force: true });
 
 export default {
-    sync: UserBase.sync,
+    sync: (force = true) => UserBase.sync({ force }),
     insert: function (model: any) {
         return UserBase.create(model);
     },

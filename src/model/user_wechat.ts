@@ -35,7 +35,7 @@ UserWechat.init(
 // UserWechat.sync({ force: true });
 
 export default {
-    sync: UserWechat.sync,
+    sync: (force = true) => UserWechat.sync({ force }),
     insert: function (model: any) {
         return UserWechat.create(model);
     },
