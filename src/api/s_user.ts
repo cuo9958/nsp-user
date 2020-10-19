@@ -36,13 +36,12 @@ router.get("/", CheckServer(), async function (ctx: ictx) {
 //修改用户信息
 router.post("/update", CheckServer(), async function (ctx: ictx) {
     try {
-        const user = ctx.session.user;
-        const { headimg, remark } = ctx.request.body;
+        const { uuid, headimg, remark } = ctx.request.body;
         const model = {
             headimg,
             remark,
         };
-        const info = await UserInfoModel.update(model, user.uuid);
+        const info = await UserInfoModel.update(model, uuid);
         ctx.body = SuccessData(info);
     } catch (error) {
         console.log(error);
