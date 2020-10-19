@@ -19,7 +19,7 @@ function CreatePWD(password: string) {
 }
 //鉴权接口
 router.get("/", CheckUser(), function (ctx: ictx) {
-    ctx.body = SuccessData(null);
+    ctx.body = SuccessData(ctx.session.user);
 });
 //登录接口
 router.post("/login", async function (ctx) {
@@ -39,7 +39,7 @@ router.post("/login", async function (ctx) {
             nickname: model.nickname,
             uuid: model.uuid,
         });
-        ctx.body = SuccessData(Object.assign(model, { token }));
+        ctx.body = SuccessData(Object.assign({ token }, model.dataValues));
     } catch (error) {
         console.log(error);
         ctx.body = ErrorData("用户名或密码不正确");

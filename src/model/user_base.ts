@@ -22,6 +22,8 @@ class UserBase extends Model<UserBaseAttr> implements UserBaseAttr {
     public nickname!: string;
     public pwd!: string;
     public status!: number;
+
+    public dataValues: UserBaseAttr;
 }
 
 UserBase.init(

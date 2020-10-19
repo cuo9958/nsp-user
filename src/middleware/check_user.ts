@@ -15,6 +15,7 @@ export function CheckUser() {
             if (!model) {
                 return (ctx.body = ErrorData("还没有登录"));
             }
+            ctx.session.user = model;
             await next();
         } catch (error) {
             console.log(error);
