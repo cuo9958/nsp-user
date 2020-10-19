@@ -20,4 +20,6 @@ module.exports = {
         host: "127.0.0.1",
         password: "123456",
     },
+    //服务调用的通行证
+    pass_check: "123",
 };

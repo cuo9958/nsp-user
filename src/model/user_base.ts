@@ -93,6 +93,20 @@ export default {
             },
         });
     },
+    getByUuid(uuid: string) {
+        return UserBase.findOne({
+            where: {
+                uuid,
+            },
+        });
+    },
+    getByUserName(username: string) {
+        return UserBase.findOne({
+            where: {
+                username,
+            },
+        });
+    },
     isExist(username: string) {
         return UserBase.findOne({
             where: {
@@ -108,7 +122,7 @@ export default {
                 pwd,
                 status: 1,
             },
-            attributes: ["uuid", "username", "nickname", "createdAt"],
+            attributes: ["uuid", "username", "nickname", "createdAt", "user_type"],
         });
     },
 };

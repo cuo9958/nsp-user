@@ -5,6 +5,7 @@ interface UserInfoAttr {
     id: number;
     uuid: string;
     headimg: string;
+    remark: string;
 }
 /**
  * 微信登录表
@@ -13,6 +14,7 @@ class UserInfo extends Model implements UserInfoAttr {
     public id: number;
     public uuid: string;
     public headimg: string;
+    public remark: string;
 }
 UserInfo.init(
     {
@@ -31,6 +33,11 @@ UserInfo.init(
             defaultValue: "",
             comment: "头像",
         },
+        remark: {
+            type: DataTypes.STRING(100),
+            defaultValue: "",
+            comment: "备注",
+        },
     },
     {
         sequelize: db,
@@ -46,7 +53,7 @@ UserInfo.init(
 );
 
 //强制初始化数据库
-// UserWechat.sync({ force: true });
+// UserInfo.sync({ force: true });
 
 export default {
     sync: (force = true) => UserInfo.sync({ force }),
@@ -58,6 +65,11 @@ export default {
             where: {
                 uuid,
             },
+        });
+    },
+    update(model, uuid) {
+        return UserInfo.update(model, {
+            where: { uuid },
         });
     },
 };

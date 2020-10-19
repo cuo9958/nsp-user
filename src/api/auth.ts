@@ -47,7 +47,7 @@ router.post("/login", async function (ctx) {
 });
 //注册接口
 router.post("/reg", async function (ctx) {
-    const { username, password, nickname = "游客" } = ctx.request.body;
+    const { username, password, nickname = "游客", user_type = 0 } = ctx.request.body;
     if (!username || !password) {
         return (ctx.body = ErrorData("用户名或密码不能为空"));
     }
@@ -59,12 +59,13 @@ router.post("/reg", async function (ctx) {
             username,
             nickname,
             uuid,
+            user_type,
         };
         const isInsert = await UserBaseModel.isExist(username);
         if (isInsert) throw new Error("账号已经存在");
         await UserBaseModel.insert(model, pwd);
         const token = UserService.CreateToken(username, model);
-        ctx.body = SuccessData({ token, username, nickname, uuid });
+        ctx.body = SuccessData({ token, username, nickname, uuid, user_type });
     } catch (error) {
         console.log(error);
         ctx.body = ErrorData(error.message || "注册失败");
