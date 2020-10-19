@@ -8,6 +8,7 @@ interface UserBaseAttr {
     nickname: string;
     pwd: string;
     status: number;
+    user_type: number;
 }
 // interface UserBaseOption extends Optional<UserBaseAttr, "id"> {}
 /**
@@ -22,6 +23,7 @@ class UserBase extends Model<UserBaseAttr> implements UserBaseAttr {
     public nickname!: string;
     public pwd!: string;
     public status!: number;
+    public user_type: number;
 
     public dataValues: UserBaseAttr;
 }
@@ -37,6 +39,11 @@ UserBase.init(
             type: DataTypes.STRING(20),
             defaultValue: "",
             comment: "用户对外id",
+        },
+        user_type: {
+            type: DataTypes.TINYINT,
+            defaultValue: 0,
+            comment: "用户类型,主动设置，默认0",
         },
         username: {
             type: DataTypes.STRING(50),

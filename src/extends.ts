@@ -9,6 +9,7 @@ interface iSession {
 interface IUser {
     id: number;
     user_type: number;
-    tell: string;
+    username: string;
     nickname: string;
+    uuid: string;
 }
