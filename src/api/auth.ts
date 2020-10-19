@@ -38,6 +38,7 @@ router.post("/login", async function (ctx) {
             username: model.username,
             nickname: model.nickname,
             uuid: model.uuid,
+            user_type: model.user_type,
         });
         ctx.body = SuccessData(Object.assign({ token }, model.dataValues));
     } catch (error) {
