@@ -15,7 +15,7 @@ const UUIDFactory = customAlphabet("1234567890abcdef", 20);
 function CreatePWD(password: string) {
     const hash = crypto.createHash("sha256");
     hash.update(password + "" + dot);
-    return hash.digest("hex");
+    return hash.digest("hex").substr(0, 50);
 }
 //鉴权接口
 router.get("/", CheckUser(), function (ctx: ictx) {
@@ -29,6 +29,7 @@ router.post("/login", async function (ctx) {
     }
     try {
         const pwd = CreatePWD(password);
+        console.log(pwd);
         const model = await UserBaseModel.login(username, pwd);
         if (!model) {
             return (ctx.body = ErrorData("用户名或密码不正确"));
