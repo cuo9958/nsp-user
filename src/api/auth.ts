@@ -33,7 +33,11 @@ router.post("/login", async function (ctx) {
         if (!model) {
             return (ctx.body = ErrorData("用户名或密码不正确"));
         }
-        const token = UserService.CreateToken(username, model);
+        const token = UserService.CreateToken(username, {
+            username: model.username,
+            nickname: model.nickname,
+            uuid: model.uuid,
+        });
         ctx.body = SuccessData(Object.assign(model, { token }));
     } catch (error) {
         console.log(error);
@@ -53,13 +57,11 @@ router.post("/reg", async function (ctx) {
         const model = {
             username,
             nickname,
-            pwd,
             uuid,
         };
-        console.log(model);
         const isInsert = await UserBaseModel.isExist(username);
         if (isInsert) throw new Error("账号已经存在");
-        await UserBaseModel.insert(model);
+        await UserBaseModel.insert(model, pwd);
         const token = UserService.CreateToken(username, model);
         ctx.body = SuccessData({ token, username, nickname, uuid });
     } catch (error) {

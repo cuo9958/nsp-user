@@ -1,12 +1,29 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Optional } from "sequelize";
 import db from "../db//mysql";
 
+interface UserBaseAttr {
+    id: number;
+    uuid: string;
+    username: string;
+    nickname: string;
+    pwd: string;
+    status: number;
+}
+// interface UserBaseOption extends Optional<UserBaseAttr, "id"> {}
 /**
  * 用户基础表，提供：
  * 1. 登录注册
  * 2. 鉴权、常用信息
  */
-class UserBase extends Model {}
+class UserBase extends Model<UserBaseAttr> implements UserBaseAttr {
+    public id!: number;
+    public uuid!: string;
+    public username!: string;
+    public nickname!: string;
+    public pwd!: string;
+    public status!: number;
+}
+
 UserBase.init(
     {
         id: {
@@ -57,8 +74,8 @@ UserBase.init(
 
 export default {
     sync: (force = true) => UserBase.sync({ force }),
-    insert: function (model: any) {
-        return UserBase.create(model);
+    insert: function (model: any, pwd: string) {
+        return UserBase.create(Object.assign({}, model, { pwd }));
     },
     get: function (id: number) {
         return UserBase.findOne({
@@ -80,8 +97,9 @@ export default {
             where: {
                 username,
                 pwd,
+                status: 1,
             },
-            attributes: ["uuid", "username", "nickname", "status", "createdAt"],
+            attributes: ["uuid", "username", "nickname", "createdAt"],
         });
     },
 };
