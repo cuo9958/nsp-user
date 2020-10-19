@@ -29,7 +29,6 @@ router.post("/login", async function (ctx) {
     }
     try {
         const pwd = CreatePWD(password);
-        console.log(pwd);
         const model = await UserBaseModel.login(username, pwd);
         if (!model) {
             return (ctx.body = ErrorData("用户名或密码不正确"));
