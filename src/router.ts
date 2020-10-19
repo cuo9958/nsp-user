@@ -1,14 +1,14 @@
 import Router from "koa-router";
 
 import test from "./api";
-import Login from "./api/login";
+import auth from "./api/auth";
 
 const router = new Router();
 
 router.use("/api_user/test", test);
 
 //公共接口
-router.use("/api_user/pub/login", Login);
+router.use("/api_user/pub/auth", auth);
 
 //内部接口
 

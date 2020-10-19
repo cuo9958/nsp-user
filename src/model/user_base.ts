@@ -67,6 +67,14 @@ export default {
             },
         });
     },
+    isExist(username: string) {
+        return UserBase.findOne({
+            where: {
+                username,
+            },
+            attributes: ["username"],
+        });
+    },
     login(username: string, pwd: string) {
         return UserBase.findOne({
             where: {
