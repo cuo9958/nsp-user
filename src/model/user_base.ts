@@ -1,5 +1,5 @@
 import { Model, DataTypes, Optional } from "sequelize";
-import db from "../db//mysql";
+import db from "../db/mysql";
 
 interface UserBaseAttr {
     id: number;

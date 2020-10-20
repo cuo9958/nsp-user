@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import db from "../db//mysql";
+import db from "../db/mysql";
 
 /**
  * 微信登录表
